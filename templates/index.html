@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Personalized Investment Recommendation System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>Personalized Investment Recommendation System</h1>
+<p>This system will recommend investments that are tailored to your individual risk tolerance and investment goals.</p>
+<form action="/recommendations" method="post">
+<div class="form-group">
+<label for="risk-tolerance">Risk Tolerance</label>
+<select name="risk-tolerance" id="risk-tolerance">
+<option value="low">Low</option>
+<option value="medium">Medium</option>
+<option value="high">High</option>
+</select>
+</div>
+<div class="form-group">
+<label for="investment-goals">Investment Goals</label>
+<input type="text" name="investment-goals" id="investment-goals" />
+</div>
+<button type="submit">Get Recommendations</button>
+</form>
+<div class="feedback">
+<p>Your recommendations are being generated. Please wait...</p>
+<progress id="progress-bar" max="100"></progress>
+</div>
+</div>
+</body>
+<script src="script.js"></script>
+</html>
