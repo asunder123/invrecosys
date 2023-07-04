@@ -2,6 +2,7 @@ import random
 import pandas as pd
 from flask import Flask, render_template, request, jsonify
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
 
 
 app = Flask(__name__)
@@ -43,6 +44,15 @@ def classify_risk(probability):
         return "Low Risk"
 
 
+def preprocess_data(data):
+    """Preprocesses the data by encoding categorical features."""
+    encoder = LabelEncoder()
+    encoded_data = data.copy()
+    encoded_data['risk_tolerance'] = encoder.fit_transform(data['risk_tolerance'])
+    # Add similar preprocessing steps for other categorical features if applicable
+    return encoded_data
+
+
 def make_investment_recommendation(model, risk_tolerance, investment_goals, num_recommendations=3):
     """Makes investment recommendations based on the given risk tolerance and investment goals."""
     profile = {
@@ -50,12 +60,20 @@ def make_investment_recommendation(model, risk_tolerance, investment_goals, num_
         'investment_goals': investment_goals
     }
 
-    # Replace with your recommendation logic based on risk tolerance and investment goals
-    # Here, a random recommendation is generated for demonstration purposes
+    # Preprocess the profile data
+    profile_data = pd.DataFrame([profile])
+    profile_data = preprocess_data(profile_data)
+
+    # Get the features for the profile
+    features = profile_data.values[0]
+
+    # Use the trained model to predict probabilities
+    probabilities = model.predict_proba([features])[0]
+
+    # Generate recommendations based on probabilities
     recommendations = []
-    for _ in range(num_recommendations):
-        investment_type = random.choice(['Stocks', 'Bonds', 'Real Estate'])
-        probability = random.random()
+    for i, probability in enumerate(probabilities):
+        investment_type = i
         risk = classify_risk(probability)
         recommendation = {
             'investment_type': investment_type,
@@ -63,6 +81,12 @@ def make_investment_recommendation(model, risk_tolerance, investment_goals, num_
             'risk': risk
         }
         recommendations.append(recommendation)
+
+    # Sort recommendations by probability (descending)
+    recommendations = sorted(recommendations, key=lambda x: x['probability'], reverse=True)
+
+    # Select the top num_recommendations
+    recommendations = recommendations[:num_recommendations]
 
     return recommendations
 
