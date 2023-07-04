@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommendations</title>
+</head>
+<body>
+    <h1>Investment Recommendations</h1>
+    <ul>
+        {% for recommendation in investment_recommendations %}
+            <li>
+                <strong>Investment Type:</strong> {{ recommendation.investment_type }}<br>
+                <strong>Probability:</strong> {{ recommendation.probability }}
+            </li>
+        {% endfor %}
+    </ul>
+    <h1>Stock Recommendations</h1>
+    <ul>
+        {% for recommendation in stock_recommendations %}
+            <li>
+                <strong>Stock Type:</strong> {{ recommendation.stock_type }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

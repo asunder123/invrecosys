@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investment and Stock Recommendations</title>
+</head>
+<body>
+    <h1>Investment and Stock Recommendations</h1>
+    <form action="/recommendations" method="POST">
+        <label for="risk-tolerance">Risk Tolerance:</label>
+        <select id="risk-tolerance" name="risk-tolerance">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <br><br>
+        <label for="investment-goals">Investment Goals:</label>
+        <select id="investment-goals" name="investment-goals">
+            <option value="Retirement">Retirement</option>
+            <option value="Education">Education</option>
+            <option value="Wealth Accumulation">Wealth Accumulation</option>
+        </select>
+        <br><br>
+        <label for="stock-type">Stock Type:</label>
+        <select id="stock-type" name="stock-type">
+            <option value="Technology">Technology</option>
+            <option value="Finance">Finance</option>
+            <option value="Healthcare">Healthcare</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Get Recommendations">
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investment Recommendations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        
+        .back-link {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Investment Recommendations</h1>
+        <ul class="list-group mt-4">
+            {% for recommendation in recommendations %}
+            <li class="list-group-item">
+                Investment Type: {{ recommendation['investment_type'] }} (Probability: {{ recommendation['probability'] }})<br>
+                Stock Type: {{ recommendation['stock_type'] }}<br>
+                Other Details: {{ recommendation['other_details'] }}
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('home') }}" class="btn btn-primary back-link mt-4">Go back to homepage</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
