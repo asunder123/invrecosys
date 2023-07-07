@@ -34,6 +34,14 @@
             background-color: #f8f9fa;
             font-weight: bold;
         }
+        
+        .details-container {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #f1f3f5;
+        }
     </style>
 </head>
 <body>
@@ -45,7 +53,6 @@
                     <th>Investment Type</th>
                     <th>Probability</th>
                     <th>Stock Type</th>
-                    <th>Other Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +61,6 @@
                     <td>{{ recommendation['investment_type'] }}</td>
                     <td>{{ recommendation['probability'] }}</td>
                     <td>{{ stock_recommendations[loop.index0]['stock_type'] }}</td>
-                    <td>{{ stock_recommendations[loop.index0]['other_details'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
