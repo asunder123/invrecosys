@@ -20,7 +20,8 @@ def generate_random_data():
         risk = random.choice(['Low', 'Medium', 'High'])
         stock_type = random.choice(['Technology', 'Finance', 'Healthcare'])
         data.append(features + [risk, stock_type])
-
+        
+    print(data)
     return data
 
 
@@ -117,8 +118,11 @@ def get_recommendations():
     risk_tolerance = request.form['risk-tolerance']
     investment_goals = request.form['investment-goals']
 
+    
     # Generate random data for training
     data = generate_random_data()
+
+    print("Data: Training",data)
 
     # Train the investment model
     investment_model = train_random_forest_classifier(data)
@@ -139,4 +143,5 @@ def get_recommendations():
 
 
 if __name__ == '__main__':
+    generate_random_data()
     app.run()
