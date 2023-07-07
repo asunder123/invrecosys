@@ -6,32 +6,50 @@
     <style>
         body {
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: #1f1f1f;
+            color: #ffffff;
         }
         
         .container {
-            border: 1px solid #ced4da;
+            border: 1px solid #333333;
             border-radius: 5px;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: #212121;
         }
         
         .back-link {
             margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            background-color: #0056b3;
         }
         
         table {
             width: 100%;
+            color: #ffffff;
         }
         
         th, td {
             padding: 10px;
             text-align: left;
             vertical-align: top;
+            border-bottom: 1px solid #333333;
         }
         
         th {
-            background-color: #f8f9fa;
+            background-color: #333333;
             font-weight: bold;
         }
 
@@ -44,7 +62,7 @@
         .plot {
             width: 45%;
             height: 300px;
-            border: 1px solid #ced4da;
+            border: 1px solid #333333;
             border-radius: 5px;
         }
     </style>
@@ -73,16 +91,18 @@
             </tbody>
         </table>
         <div class="plot-container">
-            <div class="plot">
-                <h3>Probability Distribution</h3>
+            <div class="plot" style="background-color: #333333;">
+                <h3 style="color: #ffffff;">Probability Distribution</h3>
                 <canvas id="probability-chart"></canvas>
             </div>
-            <div class="plot">
-                <h3>Stock Performance</h3>
+            <div class="plot" style="background-color: #333333;">
+                <h3 style="color: #ffffff;">Stock Performance</h3>
                 <canvas id="stock-chart"></canvas>
             </div>
         </div>
-        <a href="{{ url_for('home') }}" class="btn btn-primary back-link mt-4">Go back to homepage</a>
+        <div class="back-link">
+            <a href="{{ url_for('home') }}" class="btn btn-primary back-link mt-4">Go back to homepage</a>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
     <script>
@@ -113,14 +133,28 @@
                         display: true,
                         title: {
                             display: true,
-                            text: "Investment Type"
+                            text: "Investment Type",
+                            color: "#ffffff"
+                        },
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        grid: {
+                            color: "#333333"
                         }
                     },
                     y: {
                         display: true,
                         title: {
                             display: true,
-                            text: "Probability"
+                            text: "Probability",
+                            color: "#ffffff"
+                        },
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        grid: {
+                            color: "#333333"
                         },
                         beginAtZero: true
                     }
@@ -151,14 +185,28 @@
                         display: true,
                         title: {
                             display: true,
-                            text: "Investment Type"
+                            text: "Investment Type",
+                            color: "#ffffff"
+                        },
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        grid: {
+                            color: "#333333"
                         }
                     },
                     y: {
                         display: true,
                         title: {
                             display: true,
-                            text: "Performance"
+                            text: "Performance",
+                            color: "#ffffff"
+                        },
+                        ticks: {
+                            color: "#ffffff"
+                        },
+                        grid: {
+                            color: "#333333"
                         },
                         beginAtZero: true
                     }
