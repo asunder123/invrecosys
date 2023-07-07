@@ -28,7 +28,7 @@ def augment_data(data):
 
 # Scrape market data from nifty and bloomberg.
 data = scrape_market_data('https://www.nseindia.com/live-market/dynaContent/live_market_watch.jsp?symbol=NIFTY')
-data = scrape_market_data('https://www.bloomberg.com/quote/^BSESN')
+#data = scrape_market_data('https://www.bloomberg.com/quote/^BSESN')
 
 # Augment the data with market data from nifty and bloomberg.
 data = augment_data(data)

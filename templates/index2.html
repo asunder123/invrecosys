@@ -2,6 +2,67 @@
 <html>
 <head>
     <title>Investment and Stock Recommendations</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        select {
+            width: 200px;
+            height: 30px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 20px;
+            background-color: #f1f1f1;
+            margin: 20px auto;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            animation: progress-animation 2s ease-in-out;
+        }
+
+        @keyframes progress-animation {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
 </head>
 <body>
     <h1>Investment and Stock Recommendations</h1>
@@ -19,8 +80,18 @@
             <option value="Education">Education</option>
             <option value="Wealth Accumulation">Wealth Accumulation</option>
         </select>
-
+        <br><br>
         <input type="submit" value="Get Recommendations">
     </form>
+    <div class="progress-bar">
+        <div class="progress-bar-fill"></div>
+    </div>
+    <script>
+        // Add animation to the progress bar when the page loads
+        document.addEventListener("DOMContentLoaded", function () {
+            var progressBarFill = document.querySelector(".progress-bar-fill");
+            progressBarFill.style.width = "100%";
+        });
+    </script>
 </body>
 </html>

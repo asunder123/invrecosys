@@ -1,0 +1,15 @@
+body {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.container {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.back-link {
+    margin-top: 20px;
+}

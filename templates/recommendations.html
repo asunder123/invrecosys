@@ -34,13 +34,18 @@
             background-color: #f8f9fa;
             font-weight: bold;
         }
-        
-        .details-container {
+
+        .plot-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .plot {
+            width: 45%;
+            height: 300px;
             border: 1px solid #ced4da;
             border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #f1f3f5;
         }
     </style>
 </head>
@@ -53,6 +58,7 @@
                     <th>Investment Type</th>
                     <th>Probability</th>
                     <th>Stock Type</th>
+                    <th>Other Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,14 +67,104 @@
                     <td>{{ recommendation['investment_type'] }}</td>
                     <td>{{ recommendation['probability'] }}</td>
                     <td>{{ stock_recommendations[loop.index0]['stock_type'] }}</td>
+                    <td>{{ stock_recommendations[loop.index0]['other_details'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <div class="plot-container">
+            <div class="plot">
+                <h3>Probability Distribution</h3>
+                <canvas id="probability-chart"></canvas>
+            </div>
+            <div class="plot">
+                <h3>Stock Performance</h3>
+                <canvas id="stock-chart"></canvas>
+            </div>
+        </div>
         <a href="{{ url_for('home') }}" class="btn btn-primary back-link mt-4">Go back to homepage</a>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
     <script>
-        // Add any embedded JavaScript here for additional visual enhancements
+        // Retrieve probability and stock performance values from Python
+        const probabilities = JSON.parse('{{ probability_values | tojson | safe }}');
+        const stockPerformances = JSON.parse('{{ stock_performance_values | tojson | safe }}');
+
+        // Probability distribution chart
+        const probabilityChartCanvas = document.getElementById("probability-chart");
+        const probabilityChartCtx = probabilityChartCanvas.getContext("2d");
+
+        new Chart(probabilityChartCtx, {
+            type: "bar",
+            data: {
+                labels: ["Investment 1", "Investment 2", "Investment 3"],
+                datasets: [{
+                    label: "Probability",
+                    data: probabilities,
+                    backgroundColor: "#007bff",
+                    borderColor: "#007bff",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: "Investment Type"
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: "Probability"
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Stock performance chart
+        const stockChartCanvas = document.getElementById("stock-chart");
+        const stockChartCtx = stockChartCanvas.getContext("2d");
+
+        new Chart(stockChartCtx, {
+            type: "bar",
+            data: {
+                labels: ["Investment 1", "Investment 2", "Investment 3"],
+                datasets: [{
+                    label: "Stock Performance",
+                    data: stockPerformances,
+                    backgroundColor: "#dc3545",
+                    borderColor: "#dc3545",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: "Investment Type"
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: "Performance"
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
