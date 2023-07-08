@@ -6,6 +6,7 @@ from sklearn.tree import export_graphviz
 from flask import Flask, render_template, request
 import joblib
 import pydotplus
+import jsonlines
 
 app = Flask(__name__)
 
@@ -68,6 +69,12 @@ def train_random_forest_classifier(data):
 
     joblib.dump(model,'test.pk1')
     model=joblib.load('test.pk1')
+
+    json_model=model.to_json()
+    
+    with jsonlines.open('model.jsonl', mode='w') as writer:
+     writer.write(json_compatible_model)
+
     print(model)
 
 
