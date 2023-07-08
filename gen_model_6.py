@@ -2,7 +2,10 @@ import random
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import export_graphviz
 from flask import Flask, render_template, request
+import joblib
+import pydotplus
 
 app = Flask(__name__)
 
@@ -53,6 +56,21 @@ def train_random_forest_classifier(data):
 
     model = RandomForestClassifier()
     model.fit(features_array, target_stock_type_array)
+
+    # Get a single decision tree from the forest
+    tree = model.estimators_[0]
+
+
+
+    print(tree)
+
+    
+
+    joblib.dump(model,'test.pk1')
+    model=joblib.load('test.pk1')
+    print(model)
+
+
 
     return model
 
@@ -127,8 +145,10 @@ def get_recommendations():
     risk_tolerance = request.form['risk-tolerance']
     investment_goals = request.form['investment-goals']
 
+
     # Generate random data for training
     data = generate_random_data()
+    train_random_forest_classifier(data)
 
     # Train the investment model
     investment_model = train_random_forest_classifier(data)

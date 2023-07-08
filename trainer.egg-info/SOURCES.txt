@@ -1,4 +1,4 @@
-scrapedata1.py
+setup.py
 trainer.egg-info/PKG-INFO
 trainer.egg-info/SOURCES.txt
 trainer.egg-info/dependency_links.txt
