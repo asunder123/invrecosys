@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
+import tensorflow as tf
+from tensorflow import keras
 
 def scrape_market_data(website):
     """Scrape market data from the given website."""
@@ -9,29 +12,41 @@ def scrape_market_data(website):
     # Extract the data from the website.
     data = soup.find_all('div', class_='stock-data')
 
-    # Return the data.
-    return data
+    # Create a DataFrame to store the scraped data
+    scraped_data = pd.DataFrame(data, columns=['Market Data'])
 
-def augment_data(data):
-    """Augment the given data with market data from nifty and bloomberg."""
-    # Scrape market data from nifty.
-    nifty_data = scrape_market_data('https://www.nseindia.com/live-market/dynaContent/live_market_watch.jsp?symbol=NIFTY')
+    # Preprocess the data if needed
+    # ...
 
-    # Scrape market data from bloomberg.
-    bloomberg_data = scrape_market_data('https://www.bloomberg.com/quote/^BSESN')
+    return scraped_data
 
-    # Merge the data from nifty, bloomberg, and the original data.
-    data = data.append(nifty_data).append(bloomberg_data)
+# Scrape market data from a specific URL
+data = scrape_market_data('https://www.bloomberg.com/quote/^BSESN')
 
-    # Return the augmented data.
-    return data
+# Prepare the data for machine learning training
+# ...
 
-# Scrape market data from nifty and bloomberg.
-data = scrape_market_data('https://www.nseindia.com/live-market/dynaContent/live_market_watch.jsp?symbol=NIFTY')
-#data = scrape_market_data('https://www.bloomberg.com/quote/^BSESN')
+# Split the data into features and labels
+features = data.drop('Target Column', axis=1)
+labels = data['Target Column']
 
-# Augment the data with market data from nifty and bloomberg.
-data = augment_data(data)
+# Create a machine learning model using TensorFlow and Keras
+model = keras.Sequential([
+    keras.layers.Dense(64, activation='relu', input_shape=(input_dim,)),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dense(1, activation='sigmoid')
+])
 
-# Print the augmented data.
-print(data)
+# Compile the model with an appropriate optimizer, loss function, and metrics
+model.compile(optimizer='adam',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+# Train the model
+model.fit(features, labels, epochs=10)
+
+# Save the trained model
+model.save('training-0.2pred.gz')
+
+# Print a summary of the trained model
+model.summary()
